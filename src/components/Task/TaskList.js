@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import TaskProps from "./TaskProps";
 import NewTaskForm from "./NewTaskForm";
 
@@ -10,10 +10,18 @@ let tasksList = [
 ];
 
 function TaskList() {
+  const [list,setList] = useState(tasksList)
+
+  const handleNewTask = (data)=>{
+    let newTaskList = [...list]
+    newTaskList.push(data)
+    setList(newTaskList)
+
+  }
   return (
     <>
-      <NewTaskForm />
-      {tasksList.map((task, index) => task.taskname)}
+      <NewTaskForm onSubmit={(data)=>handleNewTask(data)}/>
+      {list.map((task, index) => task.taskname)}
     </>
   );
 }
