@@ -1,9 +1,16 @@
 import React from 'react'
 
-function Task() {
-  return (
-    <div>Task</div>
-  )
+function Task({taskProps, id, onDelete}) {
+
+  const handleDelete =()=>{
+    onDelete(id)
+  }
+
+  return <>
+  {taskProps.taskname}
+  <button onClick={handleDelete}>Supprimer</button>
+    </>
+  
 }
 
 export default Task

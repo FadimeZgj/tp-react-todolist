@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import TaskProps from "./TaskProps";
 import NewTaskForm from "./NewTaskForm";
+import Task from "./Task";
 
 let tasksList = [
   new TaskProps("Tâche 1"),
@@ -18,10 +19,18 @@ function TaskList() {
     setList(newTaskList)
 
   }
+
+  const handleTaskDelete =(index)=>{
+    let newTaskList = [...list]
+    newTaskList = newTaskList.filter((_, i) => i !== index);
+    setList(newTaskList);
+  }
+
   return (
     <>
       <NewTaskForm onSubmit={(data)=>handleNewTask(data)}/>
-      {list.map((task, index) => task.taskname)}
+      {list.map((task, index) => 
+      <Task key={index} id={index} taskProps = {task} onDelete={(index)=>handleTaskDelete(index)} />)}
     </>
   );
 }
