@@ -8,6 +8,7 @@ let tasksList = [
   new TaskProps("Tâche 2"),
   new TaskProps("Tâche 3"),
   new TaskProps("Tâche 4"),
+
 ];
 
 function TaskList() {

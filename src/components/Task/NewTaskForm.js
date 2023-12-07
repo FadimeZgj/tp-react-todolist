@@ -2,17 +2,19 @@ import React, { useState } from "react";
 import TaskProps from "./TaskProps";
 
 function NewTaskForm({ onSubmit }) {
+  const [task, setTask] = useState(null)
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const { taskname } = e.target;
-    let task = new TaskProps(taskname.value)
+    let newTask = new TaskProps(taskname.value)
+    setTask(newTask)
     
-    onSubmit(task)
-
+    onSubmit(newTask)
     e.target.reset()
   };
+
 
   return (
     <>
