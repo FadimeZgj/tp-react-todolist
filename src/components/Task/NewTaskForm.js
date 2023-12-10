@@ -8,9 +8,8 @@ function NewTaskForm({ onSubmit }) {
     e.preventDefault();
 
     const { taskname } = e.target;
-    let newTask = new TaskProps(taskname.value)
+    let newTask = new TaskProps(Date.now(),taskname.value)
     setTask(newTask)
-    
     onSubmit(newTask)
     e.target.reset()
   };
@@ -18,10 +17,10 @@ function NewTaskForm({ onSubmit }) {
 
   return (
     <>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <label>Ajouter une nouvelle tâche</label>
-        <input type="text" name="taskname" />
-        <button>Ajouter</button>
+      <form className="form-group mb-3" onSubmit={(e) => handleSubmit(e)}>
+        <label className="form-label">Ajouter une nouvelle tâche</label>
+        <input className="form-control" type="text" name="taskname" />
+        <button type="submit" className="btn btn-primary mt-3">Ajouter</button>
       </form>
     </>
   );
