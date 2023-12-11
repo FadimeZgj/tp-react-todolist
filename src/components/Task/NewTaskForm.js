@@ -1,16 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import TaskProps from "./TaskProps";
 
 function NewTaskForm({ onSubmit }) {
-  const [task, setTask] = useState(null)
 
+  // fonction envoie du formulaire
   const handleSubmit = (e) => {
+    // annulation du comportement par défault du bouton submit
     e.preventDefault();
 
     const { taskname } = e.target;
-    let newTask = new TaskProps(Date.now(),taskname.value)
-    setTask(newTask)
+    let newTask = new TaskProps(Date.now(),taskname.value) // instancie un nouvel objet TaskProps
+    // Envoie du formulaire avec les données de l'état
     onSubmit(newTask)
+    // effacer le contenu du input
     e.target.reset()
   };
 

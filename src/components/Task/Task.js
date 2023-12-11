@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 
 function Task({ taskProps, id, onDelete }) {
-  const [status, setStatus] = useState(taskProps.isCompleted);
-  const [color, setColor] = useState("#fff");
+  const [status, setStatus] = useState(taskProps.isCompleted); // état du statut de la tâche 
+  const [color, setColor] = useState("#fff"); // état de la couleur de fond initiale 
 
+  // changer le statut de la tâche
   const handleChangeStatus = () => {
     if (status === false) {
       setStatus(true);
@@ -12,6 +13,7 @@ function Task({ taskProps, id, onDelete }) {
     }
   };
 
+  // changement de la couleur de fond en fonction du statut
   useEffect(() => {
     if (status === true) {
       setColor("#99c199");
@@ -20,6 +22,7 @@ function Task({ taskProps, id, onDelete }) {
     }
   }, [status]);
 
+  // supression d'une tâche
   const handleDelete = () => {
     onDelete(id);
   };
@@ -28,10 +31,10 @@ function Task({ taskProps, id, onDelete }) {
     <>
       <div className="p-2" style={{ backgroundColor: color }}>
         <p className="fs-4">{taskProps.taskname}</p>
-        <small>{status === false ? "En cours" : "Terminée"}</small>
+        <small className="fw-bold">{status === false ? "En cours" : "Fait"}</small>
       </div>
-      <button className="col-3 me-5 btn btn-success" onClick={(e) => handleChangeStatus(e.target.value)}>
-        {status === false ? "Terminée" : "En cours"}
+      <button className={status?"col-3 me-5 btn btn-warning":"col-3 me-5 btn btn-success"} onClick={(e) => handleChangeStatus(e.target.value)}>
+        {status ? "Reprendre la tâche" : "Terminer la tâche"}
       </button>
       <button className="col-3 btn btn-outline-danger" onClick={() => handleDelete(id)}>Supprimer</button>
     </>

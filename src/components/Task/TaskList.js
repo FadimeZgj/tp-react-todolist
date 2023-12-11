@@ -3,6 +3,7 @@ import TaskProps from "./TaskProps";
 import NewTaskForm from "./NewTaskForm";
 import Task from "./Task";
 
+// liste des tâches
 let tasksList = [
   new TaskProps(0, "Tâche 1"),
   new TaskProps(1, "Tâche 2"),
@@ -11,12 +12,14 @@ let tasksList = [
 function TaskList() {
   const [list, setList] = useState(tasksList);
 
+  // Ajout d'une nouvelle tâche
   const handleNewTask = (data) => {
-    let newTaskList = [...list];
-    newTaskList.push(data);
-    setList(newTaskList);
+    let newTaskList = [...list]; // clonage de la liste
+    newTaskList.push(data); // ajout de la nouvelle tâche dans la liste clonée
+    setList(newTaskList); // changement de l'état de la liste avec le tableau cloné
   };
 
+  // supression d'une tâche
   const handleTaskDelete = (id) => {
     let newTaskList = [...list];
     newTaskList = newTaskList.filter((elem) => elem.id !== id);

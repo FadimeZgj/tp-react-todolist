@@ -1,5 +1,6 @@
+// déclaration de la class
 class TaskProps {
-    constructor(id, taskname, isCompleted){
+    constructor(id, taskname){
         this.id = id
         this.taskname = taskname
         this.isCompleted = false
