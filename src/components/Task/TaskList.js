@@ -23,6 +23,8 @@ function TaskList() {
     let newTaskList = [...list];
     newTaskList = newTaskList.filter((elem) => elem.id !== id);
     setList(newTaskList);
+    // Mise à jour du localStorage
+    localStorage.setItem("tasks", JSON.stringify(newTaskList));
   };
 
   // Edition d'une tâche
