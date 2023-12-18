@@ -5,17 +5,23 @@ function NewTaskForm({ onSubmit }) {
 
   // fonction envoie du formulaire
   const handleSubmit = (e) => {
-    // annulation du comportement par défault du bouton submit
+    // annulation du comportement par défaut du bouton submit
     e.preventDefault();
 
     const { taskname } = e.target;
-    let newTask = new TaskProps(Date.now(),taskname.value) // instancie un nouvel objet TaskProps
-    // Envoie du formulaire avec les données de l'état
-    onSubmit(newTask)
-    // effacer le contenu du input
-    e.target.reset()
-  };
+    const newTask = new TaskProps(Date.now(), taskname.value);
 
+    // Envoie du formulaire avec les données de l'état
+    onSubmit(newTask);
+
+    // Sauvegarder la nouvelle tâche dans le localStorage
+    const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    const updatedTasks = [...storedTasks, newTask];
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+
+    // Effacer le contenu du input
+    e.target.reset();
+  };
 
   return (
     <>

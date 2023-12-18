@@ -1,16 +1,15 @@
-import React, { useState } from "react";
-import TaskProps from "./TaskProps";
+import React, { useEffect, useState } from "react";
 import NewTaskForm from "./NewTaskForm";
 import Task from "./Task";
 
-// Liste des tâches initiale
-let tasksList = [
-  new TaskProps(0, "Tâche 1"),
-  new TaskProps(1, "Tâche 2"),
-];
-
 function TaskList() {
-  const [list, setList] = useState(tasksList);
+  const [list, setList] = useState([]);
+
+  useEffect(() => {
+    // Récupérer les tâches depuis le localStorage au chargement initial
+    const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    setList(storedTasks);
+  }, []);
 
   // Ajout d'une nouvelle tâche
   const handleNewTask = (data) => {
@@ -33,6 +32,9 @@ function TaskList() {
       item.id === id ? { ...item, taskname: updatedTaskName } : item
     );
     setList(updatedList); //maj de l'état de list
+
+    // Mise à jour du localStorage
+    localStorage.setItem("tasks", JSON.stringify(updatedList));
   };
 
   return (
